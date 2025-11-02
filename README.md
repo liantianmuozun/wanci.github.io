@@ -1,1 +1,138 @@
 # wanci.github.io
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关心弹窗</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f0f8ff;
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        .popup {
+            position: fixed;
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            width: 200px;
+            z-index: 1000;
+            animation: fadeIn 0.3s;
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .popup-content {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .close-btn {
+            background: rgba(0,0,0,0.2);
+            color: #333;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 关心消息 - 使用Unicode编码确保字符兼容性
+        var messages = [
+            "天凉记得加衣服 🧥",
+            "记得多喝水哦 💧", 
+            "别熬夜早点休息 😴",
+            "按时吃饭很重要 🍚",
+            "今天要开心呀 🌸",
+            "保持微笑哦 😊",
+            "保护眼睛别太累 👀",
+            "你是最棒的 🌟",
+            "累了就休息 💤",
+            "给自己个拥抱 🤗",
+            "你值得被珍惜 💖",
+            "坚持你的梦想 ✨",
+            "愿你被温柔对待 🌺",
+            "每天都要开心 🎀",
+            "偷偷想你好多次 💕",
+            "晚安好梦 🌙",
+            "早安元气满满 ☀️",
+            "风雨过后见彩虹 🌈",
+            "听听音乐放松 🎵",
+            "学点新东西吧 📚",
+            "记得吃水果 🍎",
+            "出去走走也好 🚶",
+            "玩会游戏放松 🎮",
+            "你被深深爱着 ❤️",
+            "保持好心情 🌞",
+            "别给自己压力 🍃",
+            "慢慢来不着急 ⏳",
+            "注意添减衣服 👔",
+            "你的努力被看到 👏",
+            "恋爱脑万岁 💘"
+        ];
+        
+        // 颜色数组
+        var colors = [
+            "#FFB6C1", "#87CEFA", "#98FB98", "#FFFACD", "#E6E6FA",
+            "#FFDAB9", "#FFE4E1", "#F0FFF0", "#F0F8FF", "#FFF0F5",
+            "#F5F5DC", "#E0FFFF", "#FDF5E6", "#FFEFD5", "#FFE4B5",
+            "#D8BFD8", "#FFDEAD", "#F0E68C", "#E0FFFF", "#FAFAD2",
+            "#F5DEB3", "#F0FFF0", "#FFF8DC", "#FFEBCD", "#FFEFD5"
+        ];
+        
+        // 显示弹窗的函数
+        function showPopup() {
+            // 随机选择一条消息和颜色
+            var randomIndex = Math.floor(Math.random() * messages.length);
+            var message = messages[randomIndex];
+            var colorIndex = Math.floor(Math.random() * colors.length);
+            var color = colors[colorIndex];
+            
+            // 创建弹窗元素
+            var popup = document.createElement("div");
+            popup.className = "popup";
+            
+            // 随机位置
+            var x = Math.random() * (window.innerWidth - 220);
+            var y = Math.random() * (window.innerHeight - 120);
+            
+            popup.style.left = x + "px";
+            popup.style.top = y + "px";
+            popup.style.backgroundColor = color;
+            popup.style.borderColor = color;
+            
+            // 设置弹窗内容
+            popup.innerHTML = 
+                '<div class="popup-content">' + message + '</div>' +
+                '<button class="close-btn" onclick="this.parentElement.remove()">关闭</button>';
+            
+            // 添加到页面
+            document.body.appendChild(popup);
+        }
+        
+        // 页面加载后开始显示弹窗
+        window.onload = function() {
+            // 立即显示3个弹窗
+            for (var i = 0; i < 3; i++) {
+                showPopup();
+            }
+            
+            // 每0.2秒显示一个新弹窗
+            setInterval(showPopup, 200);
+        };
+    </script>
+</body>
+</html>
